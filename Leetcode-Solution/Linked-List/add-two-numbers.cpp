@@ -23,19 +23,16 @@ ListNode* Input() {
     int n;
     cin >> n;
 
-    ListNode* num1 = new ListNode(-1);  // Sentinal Node
-    ListNode* temp = num1;
+    ListNode num1 = ListNode(-1);  // Sentinal Node
+    ListNode* temp = &num1;
     for (int i = 0; i < n; i++) {
         int val;
         cin >> val;
         temp->next = new ListNode(val);
         temp = temp->next;
     }
-    temp = num1->next;
-    delete num1;
-    return temp;
+    return num1.next;
 }
-
 void Delete(ListNode* head) {
     while (head != nullptr) {
         auto temp = head;
@@ -54,8 +51,8 @@ void Debug(ListNode* head) {
 
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     int carry = 0;
-    ListNode* sum = new ListNode(-1);
-    ListNode* temp = sum;
+    ListNode sum = ListNode(-1);
+    ListNode* temp = &sum;
     while (l1 != nullptr && l2 != nullptr) {
         int a = l1->val;
         int b = l2->val;
@@ -84,9 +81,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         temp->next = new ListNode(carry);
     }
 
-    temp = sum->next;
-    delete sum;
-    return temp;
+    return sum.next;
 }
 
 void solution() {

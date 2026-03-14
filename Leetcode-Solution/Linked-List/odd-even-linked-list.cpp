@@ -23,17 +23,15 @@ ListNode* Input() {
     int n;
     cin >> n;
 
-    ListNode* num1 = new ListNode(-1);  // Sentinal Node
-    ListNode* temp = num1;
+    ListNode num1 = ListNode(-1);  // Sentinal Node
+    ListNode* temp = &num1;
     for (int i = 0; i < n; i++) {
         int val;
         cin >> val;
         temp->next = new ListNode(val);
         temp = temp->next;
     }
-    temp = num1->next;
-    delete num1;
-    return temp;
+    return num1.next;
 }
 
 void Delete(ListNode* head) {
@@ -53,10 +51,10 @@ void Debug(ListNode* head) {
 }
 
 ListNode* oddEvenList(ListNode* head) {
-    ListNode* OddSentinal = new ListNode(0);
-    ListNode* EvenSentinal = new ListNode(1);
-    auto oddHead = OddSentinal;
-    auto evenHead = EvenSentinal;
+    ListNode OddSentinal = ListNode(0);
+    ListNode EvenSentinal =  ListNode(1);
+    auto oddHead = &OddSentinal;
+    auto evenHead = &EvenSentinal;
 
     int n = 1;
     while (head != nullptr) {
@@ -74,12 +72,9 @@ ListNode* oddEvenList(ListNode* head) {
         n++;
     }
 
-    evenHead = EvenSentinal->next;
+    evenHead = EvenSentinal.next;
     oddHead->next = evenHead;
-    oddHead = OddSentinal->next;
-
-    delete OddSentinal;
-    delete EvenSentinal;
+    oddHead = OddSentinal.next;
 
     return oddHead;
 }

@@ -23,17 +23,15 @@ ListNode* Input() {
     int n;
     cin >> n;
 
-    ListNode* num1 = new ListNode(-1);  // Sentinal Node
-    ListNode* temp = num1;
+    ListNode num1 = ListNode(-1);  // Sentinal Node
+    ListNode* temp = &num1;
     for (int i = 0; i < n; i++) {
         int val;
         cin >> val;
         temp->next = new ListNode(val);
         temp = temp->next;
     }
-    temp = num1->next;
-    delete num1;
-    return temp;
+    return num1.next;
 }
 
 void Delete(ListNode* head) {
@@ -53,8 +51,8 @@ void Debug(ListNode* head) {
 }
 
 ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-    ListNode* sentinalNode = new ListNode(-1);
-    ListNode* head = sentinalNode;
+    ListNode sentinalNode = ListNode(-1);
+    ListNode* head = &sentinalNode;
 
     while (list1 != nullptr && list2 != nullptr) {
         if (list1->val < list2->val) {
@@ -79,10 +77,7 @@ ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         head = head->next;
     }
 
-    head = sentinalNode->next;
-    delete sentinalNode;
-
-    return head;
+    return sentinalNode.next;
 }
 
 void solution() {

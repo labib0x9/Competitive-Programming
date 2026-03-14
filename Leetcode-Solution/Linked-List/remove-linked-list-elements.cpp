@@ -23,17 +23,15 @@ ListNode* Input() {
     int n;
     cin >> n;
 
-    ListNode* num1 = new ListNode(-1);  // Sentinal Node
-    ListNode* temp = num1;
+    ListNode num1 = ListNode(-1);  // Sentinal Node
+    ListNode* temp = &num1;
     for (int i = 0; i < n; i++) {
         int val;
         cin >> val;
         temp->next = new ListNode(val);
         temp = temp->next;
     }
-    temp = num1->next;
-    delete num1;
-    return temp;
+    return num1.next;
 }
 
 void Delete(ListNode* head) {
@@ -54,8 +52,8 @@ void Debug(ListNode* head) {
 
 // TC: O(N), MC: O(1)
 ListNode* removeElements(ListNode* head, int val) {
-    ListNode* sentinalNode = new ListNode(-1);
-    ListNode* tempSentinal = sentinalNode;
+    ListNode sentinalNode = ListNode(-1);
+    ListNode* tempSentinal = &sentinalNode;
     while (head != nullptr) {
         while (head != nullptr && head->val == val) head = head->next;
         if (head == nullptr) break;
@@ -67,7 +65,7 @@ ListNode* removeElements(ListNode* head, int val) {
 
     // Need to delete the sentinal node, MEMORY LEAK :))))
 
-    return sentinalNode->next;
+    return sentinalNode.next;
 }
 
 void solution() {

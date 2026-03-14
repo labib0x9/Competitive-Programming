@@ -23,17 +23,15 @@ ListNode* Input() {
     int n;
     cin >> n;
 
-    ListNode* num1 = new ListNode(-1);  // Sentinal Node
-    ListNode* temp = num1;
+    ListNode num1 = ListNode(-1);  // Sentinal Node
+    ListNode* temp = &num1;
     for (int i = 0; i < n; i++) {
         int val;
         cin >> val;
         temp->next = new ListNode(val);
         temp = temp->next;
     }
-    temp = num1->next;
-    delete num1;
-    return temp;
+    return num1.next;
 }
 
 void Delete(ListNode* head) {
@@ -54,8 +52,8 @@ void Debug(ListNode* head) {
 
 // TC: O(n * logk), MC: O(1)
 ListNode* mergeKLists(vector<ListNode*>& lists) {
-    ListNode* sentinalNode = new ListNode(1e5);
-    ListNode* head = sentinalNode;
+    ListNode sentinalNode = ListNode(1e5);
+    ListNode* head = &sentinalNode;
     int k = lists.size();
 
     auto cmp = [](ListNode * a, ListNode * b) {
@@ -81,9 +79,7 @@ ListNode* mergeKLists(vector<ListNode*>& lists) {
         }
     }
 
-    head = sentinalNode->next;
-    delete sentinalNode;
-    return head;
+    return sentinalNode.next;
 }
 
 void solution() {

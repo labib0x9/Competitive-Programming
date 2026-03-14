@@ -23,17 +23,15 @@ ListNode* Input() {
     int n;
     cin >> n;
 
-    ListNode* num1 = new ListNode(-1);  // Sentinal Node
-    ListNode* temp = num1;
+    ListNode num1 = ListNode(-1);  // Sentinal Node
+    ListNode* temp = &num1;
     for (int i = 0; i < n; i++) {
         int val;
         cin >> val;
         temp->next = new ListNode(val);
         temp = temp->next;
     }
-    temp = num1->next;
-    delete num1;
-    return temp;
+    return num1.next;
 }
 
 void Delete(ListNode* head) {
@@ -94,8 +92,8 @@ void reorderList(ListNode* head) {
         return;
     auto midPtr = getMiddle(head);
     auto secondHalfPtr = reverse(midPtr);
-    ListNode* sentinalNode = new ListNode(0, nullptr);
-    ListNode* tempHead = sentinalNode;
+    ListNode sentinalNode = ListNode(0, nullptr);
+    ListNode* tempHead = &sentinalNode;
 
     while (head != nullptr && secondHalfPtr != nullptr) {
         tempHead->next = head;
@@ -120,8 +118,7 @@ void reorderList(ListNode* head) {
     }
 
     tempHead->next = nullptr;
-    head = sentinalNode->next;
-    delete sentinalNode;
+    head = sentinalNode.next;
 
     // Debug(head);
 }

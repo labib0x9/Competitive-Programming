@@ -23,17 +23,15 @@ ListNode* Input() {
     int n;
     cin >> n;
 
-    ListNode* num1 = new ListNode(-1);  // Sentinal Node
-    ListNode* temp = num1;
+    ListNode num1 = ListNode(-1);  // Sentinal Node
+    ListNode* temp = &num1;
     for (int i = 0; i < n; i++) {
         int val;
         cin >> val;
         temp->next = new ListNode(val);
         temp = temp->next;
     }
-    temp = num1->next;
-    delete num1;
-    return temp;
+    return num1.next;
 }
 
 void Delete(ListNode* head) {
@@ -53,9 +51,9 @@ void Debug(ListNode* head) {
 }
 
 ListNode* removeNthFromEnd(ListNode* head, int n) {
-    ListNode* sentinalNode = new ListNode(0, head);
-    ListNode* slowPtr = sentinalNode;
-    ListNode* fastPtr = sentinalNode;
+    ListNode sentinalNode = ListNode(0, head);
+    ListNode* slowPtr = &sentinalNode;
+    ListNode* fastPtr = &sentinalNode;
     while (n-- && fastPtr != nullptr) {
         fastPtr = fastPtr->next;
     }
@@ -69,10 +67,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
     if (temp != nullptr) temp = temp->next;
     slowPtr->next = temp;
 
-    head = sentinalNode->next;
-    delete sentinalNode;
-
-    return head;
+    return sentinalNode.next;
 }
 
 void solution() {
