@@ -1,3 +1,16 @@
+// https://dmoj.ca/problem/coci20c6p5
+#include <bits/stdc++.h>
+using namespace std;
+
+#define intll long long
+#define endl '\n'
+
+template<typename T>
+void PRINT(vector<T>& arr) {
+    for (int i = 0; i < int(arr.size()); i++)
+        cout << arr[i] << " \n"[i == int(arr.size()) - 1];
+}
+
 const int MAXV = (int)1e9 + 9;
 struct wavelet_tree {
     int lo, hi;
@@ -6,15 +19,19 @@ struct wavelet_tree {
     long long *c, csz; // c holds the prefix sum of elements
 
     wavelet_tree() {
-        lo = 1, hi = 0;
-        bsz = 0, csz = 0;
-		l = NULL, r = NULL;
+        lo = 1;
+        hi = 0;
+        bsz = 0;
+        csz = 0, l = NULL;
+        r = NULL;
     }
 
     wavelet_tree(vector<int>& arr) {
-        lo = 1, hi = 0;
-        bsz = 0, csz = 0;
-		l = NULL, r = NULL;
+        lo = 1;
+        hi = 0;
+        bsz = 0;
+        csz = 0, l = NULL;
+        r = NULL;
         init(arr.data(), arr.data() + arr.size(), -MAXV, MAXV);
     }
 
@@ -94,3 +111,57 @@ struct wavelet_tree {
 
 // // arr is 1-index based
 // // t.init(arr + 1, arr + n + 1, -MAXV, MAXV);
+
+template<class T, class FUNCTION>
+T upper_bound(T lo, T hi, FUNCTION&& f) {
+
+    // last true
+    T ans = -1;
+
+    while (lo <= hi) {
+        T mid = lo + (hi - lo) / 2;
+        if (f(mid)) ans = mid, lo = mid + 1;
+        else hi = mid - 1;
+    }
+    return ans;
+}
+
+void solution() {
+
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> arr(n);
+    for (auto &i : arr)
+        cin >> i;
+
+    wavelet_tree t(arr);
+
+    for (int i = 0; i < q; i++) {
+        int l, r;
+        cin >> l >> r;
+        cout << upper_bound(1, n, [&](int mid) {
+            int x = (r - l + 1) - t.LTE(l, r, mid - 1);
+            return x >= mid;
+        }) << endl;
+    }
+}
+
+int32_t main() {
+
+    // Test Case
+    bool TEST_CASE = !true;
+
+    ios::sync_with_stdio(false) ; cin.tie(0) ;
+
+    int t_c = 1, tt_c = 1;
+    if (TEST_CASE) cin >> t_c;
+
+    while (t_c--) {
+        // cout << "Case " << tt_c++ << ": ";
+        solution();
+        // if (t_c) cout << '\n';
+    }
+
+    return 0;
+}
