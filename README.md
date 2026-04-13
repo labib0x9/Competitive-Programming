@@ -6,7 +6,6 @@ My Personal **Notes, Resources, Solutions and Templates** for Competitive Progra
 - Kattis-Solution : Solution from [Kattis](https://open.kattis.com/) platform.
 - LightOj-Solution : Solution from [Lightoj](https://lightoj.com) platform.
 - Cses-Solution : Solution from [Cses](https://cses.fi/) platform.
-- Leetcode-Solution : **(Interview)** Solution from [Leetcode](https://leetcode.com/) platform.
 - Sublime Build System : Build system for cpp (linux and mac), c, go, kotlin.
 - Templates : **(CP)** Templates about different data structure, algorithm, techniques and tricks.
 - Topic : Solution to topic based (DSA) problems.
